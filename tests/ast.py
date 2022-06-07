@@ -8,10 +8,10 @@ class Ast(NodeVisitor):
     def __init__(self, filename: Path) -> None:
         content = filename.read_text()
         self._tree = ast.parse(content)
-        self._names: list[str] = list()
-        self._constants: list[str] = list()
-        self._attrs: list[str] = list()
-        self._call_args: list[str] = list()
+        self._names: List[str] = list()
+        self._constants: List[str] = list()
+        self._attrs: List[str] = list()
+        self._call_args: List[str] = list()
 
     def get_visit(self) -> None:
         self.visit(self._tree)

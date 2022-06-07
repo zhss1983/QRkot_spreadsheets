@@ -1,3 +1,4 @@
+from typing import List
 from datetime import datetime
 from pydantic import EmailStr
 
@@ -45,7 +46,7 @@ async def set_user_permissions(
         ))
 
 
-def spreadsheets_data_sort(reservations: list):
+def spreadsheets_data_sort(reservations: List):
     new_dicts_list = []
     for res in reservations:
         new_dicts_list.append(
@@ -60,7 +61,7 @@ def spreadsheets_data_sort(reservations: list):
 
 async def spreadsheets_update_value(
         spreadsheetid: str,
-        reservations: list,
+        reservations: List,
         wrapper_services: Aiogoogle
 ) -> None:
     """Обновляет данные в гугл-таблице"""

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Dict, List
 
 from sqlalchemy import select, extract
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -13,7 +13,7 @@ class CRUDCharityProject(CRUDBase):
             self,
             session:
             AsyncSession
-    ) -> list[dict[str, Any]]:
+    ) -> List[Dict[str, Any]]:
         """Возвращает все завершенные проекты отсортированные по дате."""
         select_for_test = select(
             [

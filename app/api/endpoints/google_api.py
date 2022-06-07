@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Dict, List
 from aiogoogle import Aiogoogle
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -18,7 +18,7 @@ router = APIRouter()
 
 @router.post(
     '/',
-    response_model=list[dict[str, Any]],
+    response_model=List[Dict[str, Any]],
     dependencies=[Depends(current_superuser)],
 )
 async def get_report(
