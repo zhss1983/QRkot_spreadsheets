@@ -78,7 +78,7 @@ async def delete_charity_project(
     response_model_exclude_none=True,
     response_model=CharityProjectDB
 )
-async def get_charity_project(
+async def get_charity_project_by_id(
     project_id: int,
     charity_project: CharityProjectUpdate,
     session: AsyncSession = Depends(get_async_session)

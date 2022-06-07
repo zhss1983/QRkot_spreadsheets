@@ -32,7 +32,7 @@ async def get_donations(
     response_model_exclude_none=True,
     response_model=List[DonationShow],
 )
-async def get_donations(
+async def get_my_donations(
     session: AsyncSession = Depends(get_async_session),
     user: UserTable = Depends(current_user),
 ):

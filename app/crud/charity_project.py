@@ -1,15 +1,11 @@
-from typing import Any, Optional, Union
-from sqlalchemy import not_, select, func
-from sqlalchemy import extract
+from typing import Any
 
+from sqlalchemy import select, extract
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.crud.base import CRUDBase
 from app.models import CharityProject
 
-from app.crud.base import CRUDBase
-
-from fastapi.encoders import jsonable_encoder
-from pprint import pprint
 
 class CRUDCharityProject(CRUDBase):
 
@@ -19,10 +15,17 @@ class CRUDCharityProject(CRUDBase):
             AsyncSession
     ) -> list[dict[str, Any]]:
         """Возвращает все завершенные проекты отсортированные по дате."""
-        # print(
-        #     '--------------------=======================----------------------')
-        # print(
-        #     'select_query = select(')
+        select_for_test = select(
+            [
+                extract('year', self.model.close_date) -
+                extract('year', self.model.create_date),
+                extract('month', self.model.close_date) -
+                extract('month', self.model.create_date),
+                extract('day', self.model.close_date) -
+                extract('day', self.model.create_date)
+            ]
+        )
+        print(type(select_for_test))
         select_query = select(
             [
                 self.model.name,
@@ -33,14 +36,8 @@ class CRUDCharityProject(CRUDBase):
         ).where(
             self.model.fully_invested
         )
-        # print('--------------------=======================----------------------')
-        # print('objects = await session.execute(select_query)')
         objects = await session.execute(select_query)
-        objects = objects.all()
-        # print('--------------------=======================----------------------')
-        # pprint(jsonable_encoder(objects))
-        # print('--------------------=======================----------------------')
-        return objects
+        return objects.all()
 
 
 charity_project_crud = CRUDCharityProject(CharityProject)
