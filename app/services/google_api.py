@@ -43,7 +43,8 @@ async def set_user_permissions(
             fileId=spreadsheetid,
             json=permissions_body,
             fields="id"
-        ))
+        )
+    )
 
 
 def spreadsheets_data_sort(reservations: List):

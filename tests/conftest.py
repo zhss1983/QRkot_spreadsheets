@@ -117,6 +117,7 @@ async def init_db():
     yield
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
+    (BASE_DIR / 'test.db').absolute().unlink()
 
 
 @pytest.fixture
@@ -179,7 +180,6 @@ def superuser_client():
     app.dependency_overrides = {}
     app.dependency_overrides[get_async_session] = override_db
     app.dependency_overrides[current_superuser] = lambda: superuser
-    # app.dependency_overrides[get_service] = lambda: _get_service
     with TestClient(app) as client:
         yield client
 
