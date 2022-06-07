@@ -13,7 +13,7 @@ class CRUDCharityProject(CRUDBase):
             self,
             session:
             AsyncSession
-    ) -> list[list[Any]]:
+    ) -> list[dict[str, Any]]:
         """Возвращает все завершенные проекты отсортированные по дате."""
         select_for_test = select(
             [
