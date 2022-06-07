@@ -41,3 +41,5 @@ class CRUDCharityProject(CRUDBase):
 
 
 charity_project_crud = CRUDCharityProject(CharityProject)
+
+CRUDMeetingRoom = CRUDCharityProject

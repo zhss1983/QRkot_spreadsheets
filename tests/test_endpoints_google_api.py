@@ -25,6 +25,6 @@ def test_get_report(file_ast):
     )
     async_func = file_ast.get_AsyncFunctionDef(name='get_report')
     file_ast.visit_node(async_func)
-    assert 'list' in file_ast._names, (
+    assert 'List' in file_ast._names, (
         'Endpoint `get_report` должен возвращать список'
     )
