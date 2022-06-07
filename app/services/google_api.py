@@ -69,7 +69,7 @@ async def spreadsheets_update_value(
     now_date_time = datetime.now().strftime(FORMAT)
     service = await wrapper_services.discover('sheets', 'v4')
     table_values = [
-        ['Отчет от', now_date_time],
+        ['Отчет от ' + now_date_time],
         ['Топ проектов по скорости закрытия'],
         ['Название проекта', 'Время сбора', 'Описание']
     ]
