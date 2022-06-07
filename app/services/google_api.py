@@ -14,7 +14,7 @@ async def spreadsheets_create(
     now_date_time = datetime.now().strftime(FORMAT)
     service = await wrapper_services.discover('sheets', 'v4')
     spreadsheet_body = {
-        'properties': {'title': f'Отчет на {now_date_time}',
+        'properties': {'title': f'Отчет от {now_date_time}',
                        'locale': 'ru_RU'},
         'sheets': [{'properties': {'sheetType': 'GRID',
                                    'sheetId': 0,
@@ -69,7 +69,7 @@ async def spreadsheets_update_value(
     now_date_time = datetime.now().strftime(FORMAT)
     service = await wrapper_services.discover('sheets', 'v4')
     table_values = [
-        ['Отчет от ' + now_date_time],
+        [f'Отчет от {now_date_time}'],
         ['Топ проектов по скорости закрытия'],
         ['Название проекта', 'Время сбора', 'Описание']
     ]
