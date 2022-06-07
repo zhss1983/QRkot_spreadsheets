@@ -10,7 +10,6 @@ class Settings(BaseSettings):
     secret: str = 'dvlkdfnkaskjs+cku#guo876t8higy*&T&bljviu6gIUI&T&^*kjhfytgkj'
     first_superuser_email: Optional[EmailStr] = 'root@mail.ru'
     first_superuser_password: Optional[str] = 'root0000'
-    # Переменные для Google API
     type: Optional[str] = None
     project_id: Optional[str] = None
     private_key_id: Optional[str] = None

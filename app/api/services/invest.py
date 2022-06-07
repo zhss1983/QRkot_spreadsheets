@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Generic, Sequence, Tuple, TypeVar
+from typing import Generic, Sequence, TypeVar
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -29,7 +29,7 @@ def change_invested_amount(
     charity_project: CharityProject,
     donation: Donation,
     delta: int
-) -> Tuple[CharityProject, Donation]:
+) -> tuple[CharityProject, Donation]:
     """Изменяю параметр отвечающий за уровень инвестиций"""
     charity_project.invested_amount += delta
     donation.invested_amount += delta

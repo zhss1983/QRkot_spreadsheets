@@ -1,5 +1,3 @@
-from typing import List
-
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -19,7 +17,7 @@ router = APIRouter()
 
 @router.get(
     '/',
-    response_model=List[CharityProjectDB],
+    response_model=list[CharityProjectDB],
     response_model_exclude_none=True
 )
 async def get_charity_project(
@@ -82,7 +80,7 @@ async def get_charity_project_by_id(
     project_id: int,
     charity_project: CharityProjectUpdate,
     session: AsyncSession = Depends(get_async_session)
-) -> List[CharityProjectDB]:
+) -> list[CharityProjectDB]:
     """Только для суперюзеров.
 
     Закрытый проект нельзя редактировать, также нельзя установить требуемую
