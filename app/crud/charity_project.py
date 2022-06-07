@@ -1,5 +1,6 @@
 from typing import Any, Optional, Union
 from sqlalchemy import not_, select, func
+from sqlalchemy import extract
 
 from sqlalchemy.ext.asyncio import AsyncSession
 

@@ -1,20 +1,19 @@
 # Понадобится для того, чтобы задать временные интервалы
-from datetime import datetime
 # Класс «обёртки»
 
-from typing import Any, Optional, Union, List
+from typing import Any
 from aiogoogle import Aiogoogle
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.services.google_api import (
+from app.services.google_api import (
     spreadsheets_create, set_user_permissions, spreadsheets_update_value
 )
 from app.core.db import get_async_session
 from app.core.google_client import get_service
 from app.core.user import current_superuser
 
-from app.crud.charityproject import charity_project_crud
+from app.crud.charity_project import charity_project_crud
 # Создаём экземпляр класса APIRouter
 router = APIRouter()
 
