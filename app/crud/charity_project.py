@@ -14,18 +14,6 @@ class CRUDCharityProject(CRUDBase):
             session:
             AsyncSession
     ) -> List[Dict[str, Any]]:
-        """Возвращает все завершенные проекты отсортированные по дате."""
-        select_for_test = select(
-            [
-                extract('year', self.model.close_date) -
-                extract('year', self.model.create_date),
-                extract('month', self.model.close_date) -
-                extract('month', self.model.create_date),
-                extract('day', self.model.close_date) -
-                extract('day', self.model.create_date)
-            ]
-        )
-        print(type(select_for_test))
         select_query = select(
             [
                 self.model.name,
@@ -41,5 +29,3 @@ class CRUDCharityProject(CRUDBase):
 
 
 charity_project_crud = CRUDCharityProject(CharityProject)
-
-CRUDMeetingRoom = CRUDCharityProject
