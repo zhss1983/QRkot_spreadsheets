@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Generic, Sequence, TypeVar, Tuple
+from typing import Generic, Sequence, Tuple, TypeVar
 
 from sqlalchemy.ext.asyncio import AsyncSession
 

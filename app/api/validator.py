@@ -3,8 +3,8 @@ from typing import Optional
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.crud import charity_project_crud
 from app.core.logger import HTTPException
+from app.crud import charity_project_crud
 from app.models import CharityProject
 
 

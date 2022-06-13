@@ -1,7 +1,6 @@
 import logging
 
 from asynclog import AsyncLogDispatcher
-
 from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
 

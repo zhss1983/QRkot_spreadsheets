@@ -1,9 +1,11 @@
-from typing import List
 from datetime import datetime
-from pydantic import EmailStr
+from typing import List
 
 from aiogoogle import Aiogoogle
+from pydantic import EmailStr
+
 from app.core.config import settings
+from app.schemas import CharityProjectInvested, CharityProjectInvestedDB
 
 FORMAT = "%Y/%m/%d %h:%M:%S"
 
@@ -47,13 +49,15 @@ async def set_user_permissions(
     )
 
 
-def spreadsheets_data_sort(reservations: List):
+def spreadsheets_data_sort(
+        reservations: List[CharityProjectInvestedDB]
+) -> List[CharityProjectInvested]:
     new_dicts_list = []
     for res in reservations:
         new_dicts_list.append(
             {
                 'name': res['name'],
-                'timedelta': str(res['close_date'] - res['create_date']),
+                'investment_time': str(res['close_date'] - res['create_date']),
                 'description': res['description']
             }
         )
@@ -62,7 +66,7 @@ def spreadsheets_data_sort(reservations: List):
 
 async def spreadsheets_update_value(
         spreadsheetid: str,
-        reservations: List,
+        reservations: List[CharityProjectInvested],
         wrapper_services: Aiogoogle
 ) -> None:
     """Обновляет данные в гугл-таблице"""
