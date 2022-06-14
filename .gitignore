@@ -2,9 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
-test.db
-tests/test.db
-.main.py
+/test.db
+/tests/test.db
 
 # C extensions
 *.so
@@ -133,3 +132,4 @@ dmypy.json
 
 # .idea
 .idea
+/main.py
