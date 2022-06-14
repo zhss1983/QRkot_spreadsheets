@@ -61,7 +61,7 @@ def spreadsheets_data_sort(
                 'description': res['description']
             }
         )
-    return sorted(new_dicts_list, key=lambda item: item['timedelta'])
+    return sorted(new_dicts_list, key=lambda item: item['investment_time'])
 
 
 async def spreadsheets_update_value(
