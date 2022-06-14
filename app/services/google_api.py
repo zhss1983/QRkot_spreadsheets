@@ -5,7 +5,7 @@ from aiogoogle import Aiogoogle
 from pydantic import EmailStr
 
 from app.core.config import settings
-from app.schemas import CharityProjectInvested, CharityProjectInvestedDB
+from app.schemas import CharityProjectDB
 
 FORMAT = "%Y/%m/%d %h:%M:%S"
 
@@ -49,24 +49,9 @@ async def set_user_permissions(
     )
 
 
-def spreadsheets_data_sort(
-        reservations: List[CharityProjectInvestedDB]
-) -> List[CharityProjectInvested]:
-    new_dicts_list = []
-    for res in reservations:
-        new_dicts_list.append(
-            {
-                'name': res['name'],
-                'investment_time': str(res['close_date'] - res['create_date']),
-                'description': res['description']
-            }
-        )
-    return sorted(new_dicts_list, key=lambda item: item['investment_time'])
-
-
 async def spreadsheets_update_value(
         spreadsheetid: str,
-        reservations: List[CharityProjectInvested],
+        reservations: List[CharityProjectDB],
         wrapper_services: Aiogoogle
 ) -> None:
     """Обновляет данные в гугл-таблице"""
@@ -80,9 +65,9 @@ async def spreadsheets_update_value(
     for res in reservations:
         table_values.append(
             [
-                res['name'],
-                res['timedelta'],
-                res['description']
+                res.name,
+                str(res.close_date - res.create_date),
+                res.description
             ]
         )
     update_body = {

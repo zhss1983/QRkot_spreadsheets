@@ -1,7 +1,4 @@
-from app.schemas.charityproject import (CharityProjectCreate,  # noqa
-                                        CharityProjectDB,
-                                        CharityProjectInvested,
-                                        CharityProjectInvestedDB,
-                                        CharityProjectUpdate)
-from app.schemas.donation import (DonationCreate, DonationDB,  # noqa
-                                  DonationShow)
+from app.schemas.charityproject import (  # noqa
+    CharityProjectCreate, CharityProjectDB, CharityProjectUpdate)
+from app.schemas.donation import (  # noqa
+    DonationCreate, DonationDB, DonationShow)
