@@ -17,25 +17,20 @@ class CRUDCharityProject(CRUDBase):
             CharityProject.fully_invested
         ).order_by(
             extract('year', CharityProject.close_date) -
-            extract('year', CharityProject.create_date)
-        ).order_by(
+            extract('year', CharityProject.create_date),
             extract('month', CharityProject.close_date) -
-            extract('month', CharityProject.create_date)
-        ).order_by(
+            extract('month', CharityProject.create_date),
             extract('day', CharityProject.close_date) -
-            extract('day', CharityProject.create_date)
-        ).order_by(
+            extract('day', CharityProject.create_date),
             extract('hour', CharityProject.close_date) -
-            extract('hour', CharityProject.create_date)
-        ).order_by(
+            extract('hour', CharityProject.create_date),
             extract('minute', CharityProject.close_date) -
-            extract('minute', CharityProject.create_date)
-        ).order_by(
+            extract('minute', CharityProject.create_date),
             extract('second', CharityProject.close_date) -
             extract('second', CharityProject.create_date)
         )
         objects = await session.execute(select_query)
-        return objects.all()
+        return objects.scalars().all()
 
 
 charity_project_crud = CRUDCharityProject(CharityProject)
