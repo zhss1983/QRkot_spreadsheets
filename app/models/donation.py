@@ -7,5 +7,5 @@ from .base import CharityProjectDonationMixin
 
 
 class Donation(CharityProjectDonationMixin, Base):
-    user_id = Column(GUID, ForeignKey('user.id'))
+    user_id = Column(GUID, ForeignKey("user.id"))
     comment = Column(Text, nullable=True)

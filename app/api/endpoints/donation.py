@@ -14,9 +14,7 @@ router = APIRouter()
 
 
 @router.get(
-    '/',
-    dependencies=(Depends(current_superuser),),
-    response_model=List[DonationDB]
+    "/", dependencies=(Depends(current_superuser),), response_model=List[DonationDB]
 )
 async def get_donations(
     session: AsyncSession = Depends(get_async_session),
@@ -28,7 +26,7 @@ async def get_donations(
 
 
 @router.get(
-    '/my',
+    "/my",
     response_model_exclude_none=True,
     response_model=List[DonationShow],
 )
@@ -37,20 +35,19 @@ async def get_my_donations(
     user: UserTable = Depends(current_user),
 ):
     """Получить список моих пожертвований."""
-    donations = await donation_crud.get_by_attribute(
-        'user_id', user.id, session)
+    donations = await donation_crud.get_by_attribute("user_id", user.id, session)
     return donations.all()
 
 
 @router.post(
-    '/',
+    "/",
     response_model=DonationShow,
     response_model_exclude_none=True,
 )
 async def get_charity_project(
     donation: DonationCreate,
     session: AsyncSession = Depends(get_async_session),
-    user: UserTable = Depends(current_user)
+    user: UserTable = Depends(current_user),
 ):
     """Сделать пожертвование."""
     db_obj = donation_crud.get_object_from_dict(donation, user)

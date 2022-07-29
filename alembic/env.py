@@ -13,9 +13,9 @@ from app.models import Base, CharityProject, Donation, UserTable  # noqa
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
-load_dotenv('.env')
+load_dotenv(".env")
 config = context.config
-config.set_main_option('sqlalchemy.url', os.environ['DATABASE_URL'])
+config.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
 # EnvironmentContext.configure.compare_type
 
 # Interpret the config file for Python logging.
@@ -64,7 +64,7 @@ def do_run_migrations(connection):
     context.configure(
         connection=connection,
         target_metadata=target_metadata,
-        render_as_batch=True  # ВАЖНО
+        render_as_batch=True,  # ВАЖНО
     )
 
     with context.begin_transaction():

@@ -11,8 +11,8 @@ class CharityProjectDB(DonationCharityProjectDB):
 
     def __repr__(self):
         return (
-            f'{self.name}, {self.description}, {self.id}, {self.full_amount}, '
-            f'{self.fully_invested}, {self.create_date}, {self.close_date}'
+            f"{self.name}, {self.description}, {self.id}, {self.full_amount}, "
+            f"{self.fully_invested}, {self.create_date}, {self.close_date}"
         )
 
 

@@ -17,24 +17,24 @@ async def check_charity_project_name_duplicate(
     if project_name is None:
         return
     charity_project = await charity_project_crud.get_by_attribute(
-        'name', project_name, session)
+        "name", project_name, session
+    )
     charity_project = charity_project.first()
     if charity_project is not None and charity_project.id != project_id:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
-            detail='Проект с таким именем уже существует!',
+            detail="Проект с таким именем уже существует!",
         )
 
 
 async def charity_project_id_exist(
-    project_id: int,
-    session: AsyncSession
+    project_id: int, session: AsyncSession
 ) -> CharityProject:
     charity_project = await charity_project_crud.get(project_id, session)
     if charity_project is None:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
-            detail='Программа не найдена!',
+            detail="Программа не найдена!",
         )
     return charity_project
 
@@ -43,7 +43,7 @@ def check_charity_project_is_closed(charity_project: CharityProject) -> None:
     if charity_project.fully_invested:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
-            detail='Закрытый проект нельзя редактировать!'
+            detail="Закрытый проект нельзя редактировать!",
         )
 
 
@@ -57,17 +57,16 @@ async def charity_project_permission_to_delete(
     if project.invested_amount > 0:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
-            detail=('Нельзя удалить проект, в который уже были инвестированы '
-                    'средства, его можно только закрыть.')
+            detail=(
+                "Нельзя удалить проект, в который уже были инвестированы "
+                "средства, его можно только закрыть."
+            ),
         )
     return project
 
 
 async def check_charity_project_update_blocked(
-    session: AsyncSession,
-    *,
-    project_id: int,
-    full_amount: Optional[int]
+    session: AsyncSession, *, project_id: int, full_amount: Optional[int]
 ) -> CharityProject:
     project = await charity_project_id_exist(project_id, session)
     if full_amount is None:
@@ -76,8 +75,10 @@ async def check_charity_project_update_blocked(
     if project.invested_amount > full_amount:
         raise HTTPException(
             status_code=HTTPStatus.UNPROCESSABLE_ENTITY,
-            detail=('Нельзя установить сумму требуемых инвстиций ниже уже '
-                    'проинвестированного уровня.')
+            detail=(
+                "Нельзя установить сумму требуемых инвстиций ниже уже "
+                "проинвестированного уровня."
+            ),
         )
     return project
 
@@ -87,5 +88,5 @@ def check_data_for_update_in_json(obj):
     if not dict_obj:
         raise HTTPException(
             status_code=HTTPStatus.UNPROCESSABLE_ENTITY,
-            detail='Нет данных для обновления.'
+            detail="Нет данных для обновления.",
         )

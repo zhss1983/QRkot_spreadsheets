@@ -4,12 +4,12 @@ from pydantic import BaseSettings, EmailStr
 
 
 class Settings(BaseSettings):
-    app_title: str = 'Благотворительного фонда поддержки котиков QRKot.'
-    path: str = './'
-    database_url: str = 'sqlite+aiosqlite:///./QRKot.db'
-    secret: str = 'dvlkdfnkaskjs+cku#guo876t8higy*&T&bljviu6gIUI&T&^*kjhfytgkj'
-    first_superuser_email: Optional[EmailStr] = 'root@mail.ru'
-    first_superuser_password: Optional[str] = 'root0000'
+    app_title: str = "Благотворительного фонда поддержки котиков QRKot."
+    path: str = "./"
+    database_url: str = "sqlite+aiosqlite:///./QRKot.db"
+    secret: str = "dvlkdfnkaskjs+cku#guo876t8higy*&T&bljviu6gIUI&T&^*kjhfytgkj"
+    first_superuser_email: Optional[EmailStr] = "root@mail.ru"
+    first_superuser_password: Optional[str] = "root0000"
     type: Optional[str] = None
     project_id: Optional[str] = None
     private_key_id: Optional[str] = None
@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     email: Optional[str] = None
 
     class Config:
-        env_file = '.env'
+        env_file = ".env"
 
 
 settings = Settings()

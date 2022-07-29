@@ -219,9 +219,9 @@ def test_create_charity_project(superuser_client):
 )
 def test_create_charity_project_validation_error(json, superuser_client):
     response = superuser_client.post("/charity_project/", json=json)
-    assert response.status_code == 422, (
-        "При некорректном создании проекта должен возвращаться статус-код 422."
-    )
+    assert (
+        response.status_code == 422
+    ), "При некорректном создании проекта должен возвращаться статус-код 422."
     data = response.json()
     assert (
         "detail" in data.keys()
@@ -372,9 +372,9 @@ def test_update_charity_project(superuser_client, charity_project, json, expecte
 )
 def test_update_charity_project_invalid(superuser_client, charity_project, json):
     response = superuser_client.patch("/charity_project/1", json=json)
-    assert response.status_code == 422, (
-        "При некорректном обновлении проекта должен возвращаться статус-код 422."
-    )
+    assert (
+        response.status_code == 422
+    ), "При некорректном обновлении проекта должен возвращаться статус-код 422."
 
 
 def test_create_charity_project_usual_user(user_client):
@@ -425,7 +425,7 @@ def test_patch_charity_project_fully_invested(
         "При обновлении проекта, который был полностью проинвестирован, "
         "в ответе должен быть ключ `detail`."
     )
-    assert data == {"detail": "Закрытый проект нельзя редактировать!", }, (
+    assert data == {"detail": "Закрытый проект нельзя редактировать!",}, (
         "При обновлении проекта, который был полностью "
         "проинвестирован, тело ответа API отличается от ожидаемого."
     )
@@ -449,7 +449,7 @@ def test_create_charity_project_same_name(superuser_client, charity_project):
         "При создании проекта с неуникальным именем "
         "в ответе должен быть ключ `detail`."
     )
-    assert data == {"detail": "Проект с таким именем уже существует!", }, (
+    assert data == {"detail": "Проект с таким именем уже существует!",}, (
         "При создании проекта с неуникальным именем "
         "тело ответа API отличается от ожидаемого."
     )
@@ -495,9 +495,7 @@ async def test_projects_should_be_closed_after_donation(
     charity_project_open = result.scalars().first()
     await session.refresh(charity_project_open)
 
-    assert (
-        charity_project_closed.fully_invested is True
-    ), (
+    assert charity_project_closed.fully_invested is True, (
         "Проверьте, что сумма пожертвования правильно передаётся в проект;"
         "\nпроверьте, что пожертвования обрабатываются последовательно: "
         "сперва полностью распределяется сумма из предыдущего пожертвования, затем - из последующего."
@@ -558,9 +556,7 @@ async def test_all_projects_fully_invested(superuser, user_client, session):
 
     await session.refresh(first_donation_amount)
 
-    assert (
-        first_donation_amount.fully_invested is True
-    ), (
+    assert first_donation_amount.fully_invested is True, (
         "Проверьте, что сумма пожертвования правильно передаётся в проект;"
         "\nпроверьте, что пожертвования обрабатываются последовательно: "
         "сперва полностью распределяется сумма из предыдущего пожертвования, затем - из последующего."
@@ -592,9 +588,7 @@ async def test_all_projects_fully_invested(superuser, user_client, session):
     assert (
         third_charity_project_closed.fully_invested is True
     ), "Проверьте, что при достижении требуемой суммы проект закрывается: для поля `fully_invested` устанавливается True."
-    assert (
-        second_donation_amount.fully_invested is True
-    ), (
+    assert second_donation_amount.fully_invested is True, (
         "Проверьте, что сумма пожертвования правильно передаётся в проект;"
         "\nпроверьте, что пожертвования обрабатываются последовательно: "
         "сперва полностью распределяется сумма из предыдущего пожертвования, затем - из последующего."
@@ -632,9 +626,7 @@ async def test_all_projects_fully_invested_and_donations_closed(
     assert (
         first_charity_project.invested_amount == 100
     ), "Проверьте, что сумма пожертвования уходит в проект, открытый раньше других."
-    assert (
-        first_donation_amount.fully_invested is True
-    ), (
+    assert first_donation_amount.fully_invested is True, (
         "Проверьте, что сумма пожертвования правильно передаётся в проект;"
         "\nпроверьте, что пожертвования обрабатываются последовательно: "
         "сперва полностью распределяется сумма из предыдущего пожертвования, затем - из последующего."
@@ -653,9 +645,7 @@ async def test_all_projects_fully_invested_and_donations_closed(
     assert (
         first_charity_project.invested_amount == 200
     ), "Проверьте, что сумма пожертвования уходит в проект, открытый раньше других."
-    assert (
-        second_donation_amount.fully_invested is True
-    ), (
+    assert second_donation_amount.fully_invested is True, (
         "Проверьте, что сумма пожертвования правильно передаётся в проект;"
         "\nпроверьте, что пожертвования обрабатываются последовательно: "
         "сперва полностью распределяется сумма из предыдущего пожертвования, затем - из последующего."
@@ -672,16 +662,12 @@ async def test_all_projects_fully_invested_and_donations_closed(
     assert (
         first_charity_project.fully_invested is True
     ), "Проверьте, что при достижении требуемой суммы проект закрывается: для поля `fully_invested` устанавливается True."
-    assert (
-        third_donation_amount.invested_amount == 133
-    ), (
+    assert third_donation_amount.invested_amount == 133, (
         "Проверьте, что сумма пожертвования правильно передаётся в проект;"
         "\nпроверьте, что пожертвования обрабатываются последовательно: "
         "сперва полностью распределяется сумма из предыдущего пожертвования, затем - из последующего."
     )
-    assert (
-        third_donation_amount.fully_invested is False
-    ), (
+    assert third_donation_amount.fully_invested is False, (
         "Проверьте, что сумма пожертвования правильно передаётся в проект;"
         "\nпроверьте, что пожертвования обрабатываются последовательно: "
         "сперва полностью распределяется сумма из предыдущего пожертвования, затем - из последующего."

@@ -6,7 +6,6 @@ from sqlalchemy.orm import declarative_mixin, declared_attr
 
 @declarative_mixin
 class CharityProjectDonationMixin:
-
     @declared_attr
     def full_amount(cls):
         return Column(Integer)
@@ -21,8 +20,7 @@ class CharityProjectDonationMixin:
 
     @declared_attr
     def create_date(cls):
-        return Column(
-            DateTime, default=datetime.utcnow, nullable=False)
+        return Column(DateTime, default=datetime.utcnow, nullable=False)
 
     @declared_attr
     def close_date(cls):
@@ -31,7 +29,8 @@ class CharityProjectDonationMixin:
     @declared_attr
     def __table_args__(cls):
         return (
+            CheckConstraint("full_amount >= 0", name="check_full_amount_positive"),
             CheckConstraint(
-                'full_amount >= 0', name='check_full_amount_positive'),
-            CheckConstraint(
-                'invested_amount >= 0', name='check_invested_amount_positive'))
+                "invested_amount >= 0", name="check_invested_amount_positive"
+            ),
+        )

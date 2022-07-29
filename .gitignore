@@ -4,6 +4,8 @@ __pycache__/
 *$py.class
 /test.db
 /tests/test.db
+secrets/
+secrets/*
 
 # C extensions
 *.so

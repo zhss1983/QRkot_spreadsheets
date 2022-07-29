@@ -6,8 +6,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.crud import charity_project_crud, donation_crud
 from app.models import CharityProject, Donation
 
-CharityProject = TypeVar('CharityProject', bound=CharityProject)
-Donation = TypeVar('Donation', bound=Donation)
+CharityProject = TypeVar("CharityProject", bound=CharityProject)
+Donation = TypeVar("Donation", bound=Donation)
 
 
 def check_close(obj: Generic[Donation, CharityProject]) -> bool:
@@ -16,8 +16,7 @@ def check_close(obj: Generic[Donation, CharityProject]) -> bool:
 
 
 def object_close(
-        obj: Generic[Donation, CharityProject],
-        transfer_time
+    obj: Generic[Donation, CharityProject], transfer_time
 ) -> Generic[Donation, CharityProject]:
     """Меняю статус записи с открытой на закрытую"""
     obj.fully_invested = True
@@ -26,9 +25,7 @@ def object_close(
 
 
 def change_invested_amount(
-    charity_project: CharityProject,
-    donation: Donation,
-    delta: int
+    charity_project: CharityProject, donation: Donation, delta: int
 ) -> Tuple[CharityProject, Donation]:
     """Изменяю параметр отвечающий за уровень инвестиций"""
     charity_project.invested_amount += delta
@@ -42,7 +39,7 @@ def delta(delta_item: Generic[Donation, CharityProject]) -> int:
 
 
 def multi_check_close(
-        obj: Generic[Donation, CharityProject]
+    obj: Generic[Donation, CharityProject]
 ) -> Generic[Donation, CharityProject]:
     """Проверяю записи на остаток суммы и возвращаю только закртые"""
     for item in obj:
@@ -52,13 +49,13 @@ def multi_check_close(
 
 
 def transfer(
-        obj_1: Generic[Donation, CharityProject],
-        obj_1_index: int,
-        obj_1_count: int,
-        obj_1_delta: int,
-        obj_2: Generic[Donation, CharityProject],
-        obj_2_index: int,
-        transfer_time: datetime
+    obj_1: Generic[Donation, CharityProject],
+    obj_1_index: int,
+    obj_1_count: int,
+    obj_1_delta: int,
+    obj_2: Generic[Donation, CharityProject],
+    obj_2_index: int,
+    transfer_time: datetime,
 ):
     add_updates = []
     obj_1, obj_2 = change_invested_amount(obj_1, obj_2, obj_1_delta)
@@ -76,8 +73,7 @@ def transfer(
 
 
 def money_transfer(
-    donations: Sequence[Donation],
-    charity_projects: Sequence[CharityProject]
+    donations: Sequence[Donation], charity_projects: Sequence[CharityProject]
 ):
     """Переписываю деньги из донатов в проекты и возвращаю каждый изменённый"""
     result = []
@@ -96,12 +92,24 @@ def money_transfer(
         donation_delta = delta(donation)
         if donation_delta <= charity_project_delta:
             add_updates, interrupt, donation_index, charity_index = transfer(
-                donation, donation_index, donations_count, donation_delta,
-                charity_project, charity_index, transfer_time)
+                donation,
+                donation_index,
+                donations_count,
+                donation_delta,
+                charity_project,
+                charity_index,
+                transfer_time,
+            )
         else:
             add_updates, interrupt, charity_index, donation_index = transfer(
-                charity_project, charity_index, charity_projects_count,
-                charity_project_delta, donation, donation_index, transfer_time)
+                charity_project,
+                charity_index,
+                charity_projects_count,
+                charity_project_delta,
+                donation,
+                donation_index,
+                transfer_time,
+            )
         result += add_updates
     return result
 

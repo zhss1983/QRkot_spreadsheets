@@ -6,7 +6,6 @@ from fastapi.encoders import jsonable_encoder
 
 
 class HTTPExceptionLogged:
-
     def debug(self, func):
         """Не реализовано"""
         pass
@@ -24,6 +23,7 @@ class HTTPExceptionLogged:
             http_exception = func(*argv, **kwargv)
             logger.error(jsonable_encoder(http_exception))
             return http_exception
+
         return wrapper
 
     def critical(self, func):
@@ -33,12 +33,12 @@ class HTTPExceptionLogged:
 
 def write_info_log(msg):
     """Реализация собственного метода регистрации логов уровня INFO"""
-    print('INFO:', msg)
+    print("INFO:", msg)
 
 
 def write_warning_log(msg):
     """Реализация собственного метода регистрации логов уровня WARNING"""
-    print('WARNING:', msg)
+    print("WARNING:", msg)
 
 
 logger = logging.getLogger()
