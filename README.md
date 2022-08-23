@@ -1,5 +1,6 @@
 # Благотворительный фонда поддержки котиков QRKot.
 
+## Описание:
 Фонд собирает пожертвования на различные целевые проекты: 
 - на медицинское обслуживание нуждающихся хвостатых
 - на обустройство кошачьей колонии в подвале
@@ -15,7 +16,15 @@
 
 Зарегистрированные пользователи могут отправлять пожертвования и просматривать список своих пожертвований.
 
-## Установка
+## Стек технологий:
+
+**[Python 3](https://www.python.org/downloads/), 
+ [FastAPI](https://fastapi.tiangolo.com/), 
+ [SQLite3](https://www.sqlite.org/docs.html),
+ [SQLAlchemy](https://www.sqlalchemy.org/),
+ [Uvicorn](https://www.uvicorn.org/).**
+ 
+ ## Установка:
 
 ```sh
 git clone https://github.com/zhss1983/cat_charity_fund
